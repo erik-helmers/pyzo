@@ -206,6 +206,12 @@ class BaseTextCtrl(codeeditor.CodeEditor):
         self.setFont(pyzo.config.view.fontname)
         self.setZoom(pyzo.config.view.zoom)
         
+        # Set style/theme
+        try:
+            self.setStyle(pyzo.themes[pyzo.config.settings.theme.lower()]['data'])
+        except Exception as err:
+            print("Could not load theme: " + str(err))
+
         # Create timer for autocompletion delay
         self._delayTimer = QtCore.QTimer(self)
         self._delayTimer.setSingleShot(True)
